@@ -1,0 +1,36 @@
+<!-- signup.component.html -->
+<div class="main-container">
+    <div class="main">
+      <h1 class="main-heading">Signup</h1>
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="uname">Username</label>
+          <input type="text" id="uname" formControlName="name" placeholder="Enter your name">
+          <small *ngIf="signupForm.controls['name'].invalid && signupForm.controls['name'].touched">Name is required</small>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" formControlName="email" placeholder="Enter your email">
+          <small *ngIf="signupForm.controls['email'].invalid && signupForm.controls['email'].touched">Valid email is required</small>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone" formControlName="phone" placeholder="Enter your phone number">
+          <small *ngIf="signupForm.controls['phone'].invalid && signupForm.controls['phone'].touched">Phone number is required</small>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" formControlName="password" placeholder="Enter your password">
+          <small *ngIf="signupForm.controls['password'].invalid && signupForm.controls['password'].touched">Password is required</small>
+        </div>
+        <div class="form-group">
+          <label for="confirm_password">Confirm Password</label>
+          <input type="password" id="confirm_password" formControlName="confirm_password" placeholder="Confirm your password">
+          <small *ngIf="signupForm.controls['confirm_password'].invalid && signupForm.controls['confirm_password'].touched">Confirm password is required</small>
+        </div>
+        <button type="submit" [disabled]="signupForm.invalid">Sign Up</button>
+      </form>
+      <p class="login-link">Already have an account? <a href="/login">Log In</a></p>
+    </div>
+  </div>
+

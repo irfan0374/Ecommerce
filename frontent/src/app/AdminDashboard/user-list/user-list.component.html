@@ -1,0 +1,31 @@
+
+<app-sidebar></app-sidebar>
+<div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>email</th>
+          <th>Active</th>
+          <!-- <th></th>
+          <th>Image</th>
+          <th>Created At</th>
+          <th>Vegetable Category</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of Users">
+          <td>{{ user.id }}</td>
+          <td>{{ user.username }}</td>
+          <td>{{ user.email}}</td>
+          <td>
+            <button class="button-41" *ngIf="user.is_active" (click)="toggleStatus(user.id,user.is_active)">Block</button>
+            
+            <button class="button-42" *ngIf="!user.is_active" (click)="toggleStatus(user.id,user.is_active)">Unblock</button>
+          </td>
+       
+        </tr>
+      </tbody>
+    </table>
+  </div>

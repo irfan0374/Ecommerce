@@ -1,0 +1,65 @@
+
+    <app-sidebar></app-sidebar>
+    <div class="admin-orders-header">
+      <h1>Manage Orders</h1>
+    <div class="orders-table-container">
+      <table class="orders-table" *ngIf="orders.length > 0">
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Date</th>
+            <th>Product</th>
+            <th>Customer</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of orders">
+            <td class="order-id">#{{order.id}}</td>
+            <td>{{formatDate(order.ordered_date)}}</td>
+            <td class="product-cell">
+              <div class="product-info">
+                <img [src]="order.product.image" [alt]="order.product.title">
+                <div>
+                  <div class="product-name">{{order.product.title}}</div>
+                  <div class="product-quantity">Qty: {{order.quantity}}</div>
+                </div>
+              </div>
+            </td>
+            <td class="address-cell">
+              <div class="address">{{order.address}}</div>
+              <div class="payment-method">{{order.payment_method | uppercase}}</div>
+            </td>
+            <td class="price">₹{{order.total_price}}</td>
+            <td>
+              <div class="status-badge" [ngClass]="getStatusClass(order.status)">
+                {{order.status | titlecase}}
+              </div>
+            </td>
+            <td>
+              <div class="order-actions">
+                <select 
+                  [(ngModel)]="order.status"
+                  (ngModelChange)="updateOrderStatus(order, $event)"
+                  class="status-select"
+                  [disabled]="order.status === 'order-cancelled' || order.status === 'order-delivered'"
+                >
+                  <option *ngFor="let status of orderStatuses" [ngValue]="status">
+                    {{status | titlecase}}
+                  </option>
+                </select>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  
+      <div *ngIf="orders.length === 0" class="empty-state">
+        <i class="fas fa-box-open"></i>
+        <h2>No Orders Found</h2>
+        <p>There are no orders in the system.</p>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,70 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <div class="cart-wrapper">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h1>Shopping Cart</h1>
+            </div>
+            
+            <ng-container *ngIf="(cartItems$ | async) as cartItems">
+                <div *ngIf="cartItems.length > 0; else emptyCart">
+                    <div class="cart-labels">
+                        <h3 class="product-details">Product Details</h3>
+                        <h3 class="quantity">Quantity</h3>
+                        <h3 class="price">Price</h3>
+                        <h3 class="total">Total</h3>
+                        <h3 class="action">Action</h3>
+                    </div>
+
+                    <div *ngFor="let item of cartItems" class="cart-item">
+                        <div class="product-info">
+                            <div class="product-image">
+                                <img [src]="item.product.image" [alt]="item.product.title">
+                            </div>
+                            <div class="product-details">
+                                <span class="product-title">{{ item.product.title }}</span>
+                            </div>
+                        </div>
+
+                        <div class="quantity-input">
+                            <input type="number" 
+                                   [value]="item.quantity" 
+                                   (change)="updateQuantity(item.cart, item.product.id, $event)" 
+                                   min="1">
+                        </div>
+
+                        <div class="item-price">${{ item.product.price }}</div>
+                        <div class="item-total">${{ calculateTotalPrice(item) }}</div>
+                        
+                        <div class="item-action">
+                            <button class="buy-now" (click)="buy(item.product.id, item.quantity)">
+                                Buy 
+                            </button>
+                        
+                            <button class="delete-btn" (click)="removeItem(item.cart, item.product.id)">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Total and Checkout Section -->
+                    <div class="cart-summary" *ngIf="total$ | async as total">
+                        <div class="total-amount">
+                            Total: ${{ total }}
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <ng-template #emptyCart>
+                    <div class="empty-cart-message">
+                        <p>Your cart is empty.</p>
+                        <button routerLink="/products" class="continue-shopping"(click)="navigate()">
+                            Continue Shopping
+                        </button>
+                    </div>
+                </ng-template>
+            </ng-container>
+        </div>
+    </div>
+</div>

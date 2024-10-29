@@ -1,0 +1,83 @@
+<app-navbar></app-navbar>
+<div class="orders-container">
+  <div class="orders-header">
+    <h1>My Orders</h1>
+    <div class="filters">
+      <select [(ngModel)]="statusFilter" (change)="filterOrders()" class="filter-select">
+        <option value="all">All Orders</option>
+        <option value="order-placed">Pending</option>
+        <option value="on-transit">Shipped</option>
+        <option value="order-delivered">Delivered</option>
+        <option value="order-cancelled">Cancelled</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="orders-list" *ngIf="filteredOrders.length > 0">
+    <div *ngFor="let order of filteredOrders" class="order-card">
+      <div class="order-header">
+        <div class="order-info">
+          <h2>Order #{{order.id}}</h2>
+          <p class="order-date">{{formatDate(order.ordered_date)}}</p>
+        </div>
+        <div class="order-status" [ngClass]="getStatusClass(order.status)">
+          {{order.status | titlecase}}
+        </div>
+      </div>
+
+      <div class="order-items">
+        <div class="order-item">
+          <div class="item-image">
+            <img [src]="order.product.image" [alt]="order.product.title">
+          </div>
+          <div class="item-details">
+            <h3>{{order.product.title}}</h3>
+            <p class="quantity">Quantity: {{order.quantity}}</p>
+            <p class="price">₹{{order.product.price}}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="order-footer">
+        <div class="order-address">
+          <h4>Shipping Address:</h4>
+          <p>{{order.address}}</p>
+        </div>
+        <div class="order-payment">
+          <h4>Payment Method:</h4>
+          <p>{{order.payment_method | uppercase}}</p>
+        </div>
+        <div class="order-total">
+          <h4>Total Amount:</h4>
+          <p class="total-price">₹{{order.total_price}}</p>
+        </div>
+      </div>
+
+      <div class="order-actions">
+        <button class="action-button track" (click)="trackOrder(order)">
+          Track Order
+        </button>
+        
+        <ng-container [ngSwitch]="order.status">
+          <button *ngSwitchCase="'order-placed'" 
+                  class="action-button cancel" 
+                  (click)="cancelOrder(order.id)">
+            Cancel Order
+          </button>
+          <button *ngSwitchCase="'delivered'" 
+                  class="action-button return" 
+                 >
+            Return Order
+          </button>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="filteredOrders.length === 0" class="empty-state">
+    <i class="fas fa-shopping-bag"></i>
+    <h2>No orders found</h2>
+    <p>{{statusFilter === 'all' ? 'You haven\'t placed any orders yet.' : 'No orders match your current filters.'}}</p>
+    <button class="action-button primary" routerLink="/product">Start Shopping</button>
+  </div>
+</div>

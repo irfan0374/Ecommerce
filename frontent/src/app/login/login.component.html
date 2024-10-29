@@ -1,0 +1,23 @@
+<div class="main_container">
+    <div class="form-login">
+      <h2 class="logo">Green Cart</h2>
+      
+      <form [formGroup]="loginform" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="uname" formControlName="email" class="form-control">
+          <small *ngif="loginform.controls['email'].invalid && loginform.controls['email'].touched">Valid email is required</small>
+        </div>
+        <div class="form-group">
+          <label for="pword">Password:</label>
+          <input type="password" id="pword" formControlName="password" class="form-control">
+        <small *ngif="loginform.controls['password'].invalid && loginform.controls[password].touched">Password is required</small>
+        </div>
+        <div class="btn-container">
+          <div class="error"></div>
+          <button type="submit" [disabled]="loginform.invalid" class="btn btn-dark">Login</button>
+        </div>
+        <p>Don't have an account? <a href="/signup">Sign up</a></p>
+      </form>
+    </div>
+  </div>

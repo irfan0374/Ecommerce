@@ -1,0 +1,29 @@
+
+  <app-sidebar></app-sidebar>
+  <div class="table-container">
+      <table>
+          <thead>
+              <tr>
+                  <th>ID</th>
+                  <th>Title</th>
+                  <th>Price</th>
+                  <th>Category</th>
+                  <th>Image</th>
+                  <th>Created At</th>
+          
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let product of products">
+                  <td>{{ product.id }}</td>
+                  <td>{{ product.title }}</td>
+                  <td>{{ product.price | currency }}</td>
+                  <td>{{ product.vegitable_category_name }}</td>
+                  <td><img [src]="product.image" [alt]="product.title" class="product-image"></td>
+                  <td>{{ product.created_at | date:'short' }}</td>
+                 
+              </tr>
+          </tbody>
+      </table>
+  </div>
+

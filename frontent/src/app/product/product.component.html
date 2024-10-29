@@ -1,0 +1,52 @@
+<app-navbar></app-navbar>
+<div class="main-container">
+  <div class="category-filter">
+    <!-- 'All Products' Button -->
+    <button 
+      class="filter-btn" 
+      [class.active]="selectedCategory === 'all'"
+      (click)="filterProducts('all')">
+      All Products
+    </button>
+
+    <!-- Category Buttons -->
+    <button 
+      *ngFor="let category of categories" 
+      class="filter-btn" 
+      [class.active]="selectedCategory === category"
+      (click)="filterProducts(category)">
+      {{category | titlecase}}
+    </button>
+  </div>
+
+  <!-- Products Grid -->
+  <div class="grid-container">
+    <div class="card" *ngFor="let product of filteredProducts" (click)="navigateToDetail(product.id)">
+      <div class="card-image">
+        <img [src]="product.image || 'assets/imageFailed.png'" [alt]="product.title">
+
+        <!-- Wishlist Heart Icon -->
+        <div class="favorite-icon" (click)="toggleFavorite($event, product)">
+          <i class="fa-solid fa-heart" [class.favorited]="isFavorited(product)"></i>
+        </div>
+      </div>
+
+      <!-- Product Information -->
+      <div class="card-content">
+        <div class="align">
+
+          <h3 class="card-title">{{ product.title }}</h3>
+          <p class="card-price">₹{{ product.price }}</p>
+        </div>
+        <p class="card-category">{{ product.category_name }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="filteredProducts.length === 0" class="empty-state">
+    <i class="fa-solid fa-basket-shopping"></i>
+    <h2>No products found</h2>
+    <p>No products available in this category.</p>
+  </div>
+</div>

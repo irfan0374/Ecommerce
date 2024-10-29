@@ -1,0 +1,165 @@
+.navbar {
+  background-color: #a0de3c ; 
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 0.75rem 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  color: #1a472a;
+  text-decoration: none;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.navbar-brand:hover {
+  transform: translateY(-1px);
+}
+
+.navbar-brand i {
+  color: #1a472a !important;
+  margin-right: 0.5rem;
+  font-size: 1.6rem;
+}
+
+.navbar-nav {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  color: #1a472a !important;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  border-radius: 6px;
+  position: relative;
+}
+
+.nav-link:hover {
+  color: #000000 !important;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.nav-link.active {
+  color: #000000;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+}
+
+.action-icons {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  color: #1a472a;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.icon-btn:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.3);
+  color: #000000;
+}
+
+.icon-btn i {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.cart-container {
+  position: relative;
+}
+
+.cart-count {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: #e74c3c;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: bold;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #a5e045;
+}
+
+.dropdown-menu {
+  background: white;
+  margin-top: 0.5rem;
+  border-radius: 8px;
+  border: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-item {
+  padding: 0.75rem 1rem;
+  color: #1a472a;
+  transition: all 0.3s ease;
+}
+
+.dropdown-item:hover {
+  background-color: rgba(165, 224, 69, 0.1);
+  color: #000000;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0.5rem;
+  }
+  
+  .navbar-brand {
+    font-size: 1.2rem;
+  }
+  
+  .icon-btn {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .icon-btn i {
+    font-size: 1rem;
+  }
+  
+  .cart-count {
+    width: 18px;
+    height: 18px;
+    font-size: 0.7rem;
+  }
+}
